@@ -1,0 +1,19 @@
+import pandas as pd
+
+# Leitura do arquivo XML
+df = pd.read_xml('faturamento.xml', xpath='/mes/dia')
+
+# Cálculo do menor e maior valor de faturamento
+menor_faturamento = df['valor'].min()
+maior_faturamento = df['valor'].max()
+
+# Cálculo da média mensal
+media_mensal = df['valor'].mean()
+
+# Cálculo do número de dias com faturamento acima da média
+dias_acima_media = (df['valor'] > media_mensal).sum()
+
+# Impressão dos resultados
+print(f"Menor valor de faturamento diário: R${menor_faturamento:.2f}")
+print(f"Maior valor de faturamento diário: R${maior_faturamento:.2f}")
+print(f"Número de dias com faturamento acima da média mensal: {dias_acima_media}")
